@@ -1,0 +1,184 @@
+{% extends 'base2.html' %}
+{% block title %}
+Game Development Courses
+{% endblock title %}
+
+{% block style %}
+<style>
+    .star {
+        color: orange;
+    }
+
+    .card-img-top {
+        max-height: 200px;
+
+        object-fit: cover;
+
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<main class="container py-5">
+    <section class="mb-5">
+        <h1 class="text-center mb-4 fw-bold display-5">
+            Game Development Courses
+        </h1>
+        <p class="text-center lead mb-5">
+            Explore our meticulously curated selection of game development courses, designed to initiate your learning
+            journey with expert guidance from experienced industry professionals.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <a href="https://www.youtube.com/watch?v=qPxvmrtTQ_4" target="_blank"
+                        class="text-decoration-none text-dark">
+                        <img alt="Course" class="card-img-top"
+                            src="https://th.bing.com/th/id/OIP.Rl5UGiiZMvhyUFbuS-o7lQHaFQ?rs=1&pid=ImgDetMain">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">
+                            Game Development For 2025
+                        </h5>
+                        <p class="card-text text-muted small mb-2">
+                            By Code with Henry
+                        </p>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="text-warning me-1">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star-half-alt star"></i>
+                                <span class="ms-1">4.7</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <a href="https://www.youtube.com/watch?v=Kp63uc2-zYI" target="_blank"
+                        class="text-decoration-none text-dark">
+                        <img alt="Course" class="card-img-top"
+                            src="https://th.bing.com/th/id/OIP.AtaILE9BU1MSCG1N7ztU4gHaH8?rs=1&pid=ImgDetMain">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">
+                            How to Be a Game Developer
+                        </h5>
+                        <p class="card-text text-muted small mb-2">
+                            By Ishan Sharma
+                        </p>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="text-warning me-1">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star-half-alt star"></i>
+                                <span class="ms-1">4.6</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <a href="https://www.youtube.com/watch?v=grUP4Yulz20&list=PLfAJSU55p-wsrvXO6MplTpKpQueW6UqJ4"
+                        target="_blank" class="text-decoration-none text-dark">
+                        <img alt="Course" class="card-img-top"
+                            src="https://edumanias.com/wp-content/uploads/2021/07/game-development-and-game-design.jpg">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">
+                            All About Game Development
+                        </h5>
+                        <p class="card-text text-muted small mb-2">
+                            By Azad Chaiwala
+                        </p>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="text-warning me-1">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star-half-alt star"></i>
+                                <span class="ms-1">4.3</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm h-100">
+                    <a href="https://www.youtube.com/watch?v=H_5u_DVTbbU" target="_blank"
+                        class="text-decoration-none text-dark">
+                        <img alt="Course" class="card-img-top"
+                            src="https://th.bing.com/th/id/OIP._NNrYQftM5xTWMj_28C5JQAAAA?rs=1&pid=ImgDetMain">
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">
+                            Best Advice for Learning Game Development in 2025
+                        </h5>
+                        <p class="card-text text-muted small mb-2">
+                            By Govind Srivastva
+                        </p>
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="text-warning me-1">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star-half-alt star"></i>
+                                <span class="ms-1">4.7</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+{% if game_development_courses %}
+    <h2 class="mt-5 mb-3 fw-bold">More Game Development Courses</h2>
+    <div class="row row-cols-1 row-cols-md-4 g-4" style="padding: 50px;">
+        {% for course in game_development_courses %}
+        <div class="col">
+            <div class="card shadow-sm h-100">
+                <img src="{{ course.image.url }}" class="card-img-top" alt="{{ course.name }}">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">{{ course.name }}</h5>
+                    <p class="card-text text-muted small">{{ course.description|truncatewords:20 }}</p>
+                    <p class="card-text"><strong class="text-">Price:</strong> <span class="fw-bold text-success">₹{{ course.price }}</span></p>
+                    <p class="card-text"><strong class="text">Duration:</strong> {{ course.duration }} hours</p>
+                    <p class="card-text"><strong class="text">Instructor:</strong> {{ course.created_by }}</p>
+                    <div class="mt-auto">
+                        {% if course.created_by != request.user %} {% if enroll %}
+                      {% if course.name in enroll %}
+                      <button class="btn signup" disabled>Enrolled</button>
+                      {% else %}
+                      <a href="{% url 'pay' course.id %}" class="btn login">Enroll Now</a>
+                      {% endif %}
+                      {% else %}
+                      <a href="{% url 'pay' course.id %}" class="btn login">Enroll Now</a>
+                      {% endif %}
+                      {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+<br><br>2
+
+
+
+{% endblock content %}

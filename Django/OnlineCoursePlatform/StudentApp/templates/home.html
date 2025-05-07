@@ -1,0 +1,906 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block style_block %}
+<style>
+    :root {
+        --primary: #b136f3;
+        --primary-dark: #a826dc;
+        --secondary: #6c757d;
+        --success: #28a745;
+        --text-primary: #333;
+        --text-secondary: #6c757d;
+        --bg-light: #f8f9fa;
+        --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --card-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        --card-border: 1px solid #eaeaea;
+        --border-radius: 8px;
+    }
+
+    .text-primary {
+        color: #b136f3 !important;
+    }
+
+    body {
+        color: var(--text-primary);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+            'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 600;
+    }
+
+    /* Header Styles */
+    .dashboard-header {
+        padding: 30px 0;
+        background-color: #fff;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .dashboard-header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0;
+        color: var(--primary);
+        letter-spacing: -0.5px;
+    }
+
+    /* Category Section */
+    .category-section {
+        background-color: var(--bg-light);
+        padding: 30px 0 10px;
+        margin-bottom: 25px;
+        border-radius: var(--border-radius);
+    }
+
+    .category-section h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        position: relative;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+    }
+
+    .category-section h2:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background-color: var(--primary);
+    }
+
+    /* Card Styles */
+    .course-card {
+        border: var(--card-border);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        overflow: hidden;
+    }
+
+    .course-card:hover {
+        box-shadow: var(--card-hover-shadow);
+        transform: translateY(-3px);
+    }
+
+    .course-card .card-img-container {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .course-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .course-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .course-card .card-body {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .course-card h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.3;
+        margin-bottom: 8px;
+        color: var(--text-primary);
+    }
+
+    .course-card .instructor {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .course-card .card-footer {
+        padding: 15px 20px;
+        background-color: #f9f9fc;
+        border-top: 1px solid #eaeaea;
+    }
+
+    /* Badge Styles */
+    .badge-premium {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: var(--primary);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 5px 10px;
+        border-radius: 30px;
+        z-index: 10;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Course Details */
+    .course-meta {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: auto;
+    }
+
+    .course-meta .meta-item {
+        display: flex;
+        align-items: center;
+        margin-right: 15px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+
+    .course-meta .meta-item i {
+        margin-right: 5px;
+        font-size: 1rem;
+    }
+
+    /* Action Button */
+    .btn-course {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: white;
+        padding: 8px 16px;
+        font-weight: 500;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .btn-course:hover {
+        background-color: var(--primary-dark);
+        border-color: var(--primary-dark);
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    /* Load More Section */
+    .load-more-section {
+        text-align: center;
+        margin: 40px 0;
+    }
+
+    .btn-load-more {
+        background-color: transparent;
+        border: 1px solid var(--primary);
+        color: var(--primary);
+        padding: 10px 20px;
+        font-weight: 500;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-load-more:hover {
+        background-color: var(--primary);
+        color: white;
+    }
+
+    /* Premium Courses Section */
+    .premium-courses {
+        margin-top: 50px;
+        padding: 40px 0;
+        background-color: #f5f7ff;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .premium-course-card {
+        border: var(--card-border);
+        border-radius: var(--border-radius);
+        box-shadow: var(--card-shadow);
+        height: 100%;
+        background-color: #fff;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+        .course-card {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+{% endblock style_block %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+
+
+
+
+
+
+<div class="dashboard-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1>Welcome, {{ request.user.username }}</h1>
+                <p class="text-muted">Explore top-rated courses and expand your knowledge</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="{% url 'my_learning' %}" class="btn login">My Learning</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="category-section">
+        <div class="container">
+            <h2>Featured Categories</h2>
+            <div class="row">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="text-center p-3 rounded bg-white shadow-sm">
+                        <i class="bi bi-code-square fs-2" style="color: #b136f3;"></i>
+                        <h5 class="mt-3">Programming</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="text-center p-3 rounded bg-white shadow-sm">
+                        <i class="bi bi-window fs-2" style="color: #b136f3;"></i>
+                        <h5 class="mt-3">Development</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="text-center p-3 rounded bg-white shadow-sm">
+                        <i class="bi bi-bar-chart fs-2" style="color: #b136f3;"></i>
+                        <h5 class="mt-3">Data Analysis</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="text-center p-3 rounded bg-white shadow-sm">
+                        <i class="bi bi-gear fs-2" style="color: #b136f3;"></i>
+                        <h5 class="mt-3">Other Software</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Programming Languages</h2>
+            <a href="#" class="text-decoration-none">View all <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-star-fill me-1"></i> Bestseller
+                        </span>
+                        <a href="https://youtu.be/4GDNUU82DX0?si=uxtLVQ_Jsci6FXD9" target="_blank">
+                            <img alt="Python Programming Course" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/jVA_NVpbyykEOQwWEHar-a-30J1kKLJVZNamDY6bVtM.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>The Complete Python Bootcamp From Zero to Hero</h3>
+                        <p class="instructor">Jose Portilla, Pierian Training</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>42 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.8 (12.4k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/4GDNUU82DX0?si=uxtLVQ_Jsci6FXD9" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-star-fill me-1"></i> Top Rated
+                        </span>
+                        <a href="https://youtu.be/KBYN6_-YTFU?si=HwIrOwt3-mV1_RFZ" target="_blank">
+                            <img class="card-img-top" alt="100 Days of Python"
+                                src="https://storage.googleapis.com/a1aa/image/mJdAJYT455ShS7K_VmzA-tiTUeT0gh5XxWzY8zwdrQo.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>100 Days of Code: The Complete Python Pro Bootcamp</h3>
+                        <p class="instructor">Dr. Angela Yu, Developer and Lead Instructor</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>58 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.7 (9.6k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/KBYN6_-YTFU?si=HwIrOwt3-mV1_RFZ" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <a href="https://youtu.be/aFfDDdAPCbA?si=d-aivldi5kKYRoJL" target="_blank">
+                            <img alt="Automate with Python" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/jVA_NVpbyykEOQwWEHar-a-30J1kKLJVZNamDY6bVtM.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Automate the Boring Stuff with Python Programming</h3>
+                        <p class="instructor">Al Sweigart</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>32 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.6 (7.2k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/aFfDDdAPCbA?si=d-aivldi5kKYRoJL" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-arrow-up-circle-fill me-1"></i> New
+                        </span>
+                        <a href="https://youtu.be/PyoWEmj457U?si=hYtUd-A3EREK_IRx" target="_blank">
+                            <img alt="Java Masterclass" class="card-img-top"
+                                src="https://python-adv-web-apps.readthedocs.io/en/latest/_images/atom.png">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Java Masterclass 2025: 130+ Hours of Expert Lessons</h3>
+                        <p class="instructor">Tim Buchalka, Tim Buchalka's Learn Programming</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>130 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.5 (5.8k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/PyoWEmj457U?si=hYtUd-A3EREK_IRx" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Development Section -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Development</h2>
+            <a href="#" class="text-decoration-none">View all <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <a href="https://youtu.be/bqAU2k8JQa8?si=6xPVwZG3IWpteF0L" target="_blank">
+                            <img alt="Python Development" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/DmUGS0E7jSYUtCzhS1R0_lRmFEhQl06ymKH4hcXiM_E.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>The Complete Python Bootcamp From Zero to Hero in Python</h3>
+                        <p class="instructor">Jose Portilla, Pierian Training</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>42 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.8 (12.4k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/bqAU2k8JQa8?si=6xPVwZG3IWpteF0L" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-star-fill me-1"></i> Bestseller
+                        </span>
+                        <a href="https://youtu.be/R6RX2Zx96fE?si=zKQSBxmiH7n67OYJ" target="_blank">
+                            <img alt="Full-Stack Web Development" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/GVy1lkivCnrCe08jgX2_wuCvd1W_UfTZtlgvXkJ1RM4.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>The Complete Full-Stack Web Development Bootcamp</h3>
+                        <p class="instructor">Dr. Angela Yu, Developer and Lead Instructor</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>65 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.7 (11.2k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/R6RX2Zx96fE?si=zKQSBxmiH7n67OYJ" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-award-fill me-1"></i> Popular
+                        </span>
+                        <a href="https://youtu.be/KBYN6_-YTFU?si=tAqvOaopMBK-JmqB" target="_blank">
+                            <img alt="100 Days of Python Coding" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/WjwEbw4BL-5wrrQKFAqyRcUinu1CW37byCZL1OLkTIw.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>100 Days of Code: The Complete Python Pro Bootcamp</h3>
+                        <p class="instructor">Dr. Angela Yu, Developer and Lead Instructor</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>58 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.7 (9.6k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/KBYN6_-YTFU?si=tAqvOaopMBK-JmqB" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <a href="https://youtu.be/1F_OgqRuSdI?si=gwnVcIt5eDqTj3y_" target="_blank">
+                            <img alt="Python Automation" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/OJxsTiXJVwcJIwp1Zucf3zOWrdKoaIAmOCbnDMe0nsk.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Automate the Boring Stuff with Python Programming</h3>
+                        <p class="instructor">Al Sweigart</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>32 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.6 (7.2k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/1F_OgqRuSdI?si=gwnVcIt5eDqTj3y_" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Analysis Section -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Data Analysis</h2>
+            <a href="#" class="text-decoration-none">View all <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-star-fill me-1"></i> Bestseller
+                        </span>
+                        <a href="https://youtu.be/AVS49C5rnuQ?si=i-Yp6GNz2_V2mJGM" target="_blank">
+                            <img alt="Microsoft Excel Advanced" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/5nnkC4blBP9jtTOVdj5OqoCJEJBcOHDGxLumkGJcNn8.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Microsoft Excel: Advanced Excel Formulas & Functions</h3>
+                        <p class="instructor">Maven Analytics, Chris Dutton</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>25 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.7 (9.1k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/AVS49C5rnuQ?si=i-Yp6GNz2_V2mJGM" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <a href="https://youtu.be/r-uOLxNrNk8?si=-5ONWcciMpu6bD10" target="_blank">
+                            <img alt="Python Data Analysis" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/RBMJf693YMu6pfdk96dWMciQPfjA6r6A5BosrOEFr6Y.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Learning Python for Data Analysis and Visualization</h3>
+                        <p class="instructor">Jose Portilla, Pierian Training</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>45 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.5 (6.7k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/r-uOLxNrNk8?si=-5ONWcciMpu6bD10" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-award-fill me-1"></i> Top Rated
+                        </span>
+                        <a href="https://youtu.be/qrMnoY8qBJM?si=uHV2A2HS9h2cVOBh" target="_blank">
+                            <img alt="Pandas and Python" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/Y8T-PJak1CiIcm3UCTFLwLPrpc-zA88s5C84COyl_MM.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Data Analysis with Pandas and Python</h3>
+                        <p class="instructor">Boris Paskhaver</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>38 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.6 (7.8k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/qrMnoY8qBJM?si=uHV2A2HS9h2cVOBh" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <a href="https://youtu.be/dMn2QFTyXUQ?si=LEQlM8aHA5SWsSyR" target="_blank">
+                            <img alt="Data Analyst Bootcamp" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/flpqkVO8MdUSrqdB0tAmgJ9OKArNLJFgGgPnED-4jXo.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>The Data Analyst Course: Complete Data Analyst Bootcamp</h3>
+                        <p class="instructor">365 Careers</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>50 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.5 (5.9k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/dMn2QFTyXUQ?si=LEQlM8aHA5SWsSyR" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Software Section -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Other Software</h2>
+            <a href="#" class="text-decoration-none">View all <i class="bi bi-arrow-right"></i></a>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-arrow-up-circle-fill me-1"></i> New
+                        </span>
+                        <a href="https://youtu.be/Z1RJmh_OqeA?si=RG4D_fc9cbtseUOO" target="_blank">
+                            <img alt="Flask Framework" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/ouXBShyvhQ9h1pMaXZcnKGzUabd9Js0VgsFs8PLZ6c0.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Python And Flask Framework Complete Course For Beginners</h3>
+                        <p class="instructor">Horizon Tech</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>28 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.4 (3.2k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/Z1RJmh_OqeA?si=RG4D_fc9cbtseUOO" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <a href="https://youtu.be/wbJcJCkBcMg?si=ikTmJf4HbuZHhzgN" target="_blank">
+                            <img alt="Microsoft Excel Beginners to Advanced" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/yItU4fUggOcJiOMMuUVzHqhmp-8wPcdook9Uea6J2cc.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Microsoft Excel - Beginner to Advance with Example</h3>
+                        <p class="instructor">Meet Doshi</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>20 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.5 (4.3k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/wbJcJCkBcMg?si=ikTmJf4HbuZHhzgN" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <span class="badge-premium">
+                            <i class="bi bi-award-fill me-1"></i> Popular
+                        </span>
+                        <a href="https://youtu.be/9SJnhUxXJsI?si=daGEwj-LrvFD4unR" target="_blank">
+                            <img alt="Python Flask Framework" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/6bIWYeuhrz4SeAot1Rr2pTQ6qtuYmoDJP4doyHeReqw.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Python And Flask Framework Complete Course</h3>
+                        <p class="instructor">Horizon Tech</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>35 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.6 (6.1k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/9SJnhUxXJsI?si=daGEwj-LrvFD4unR" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="course-card">
+                    <div class="card-img-container">
+                        <a href="https://youtu.be/9SJnhUxXJsI?si=daGEwj-LrvFD4unR" target="_blank">
+                            <img alt="Python Master Programming" class="card-img-top"
+                                src="https://storage.googleapis.com/a1aa/image/oDLlBZQrohJhHv4KfxyfjtEPhVpuuNZiZuVngTb4vuQ.jpg">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Python: Master Programming and Development with 15 Projects</h3>
+                        <p class="instructor">Dev Nirwal, Ritu Antil</p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>48 hours</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <span>4.3 (3.7k)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://youtu.be/9SJnhUxXJsI?si=daGEwj-LrvFD4unR" class="btn login" target="_blank">
+                            <i class="bi bi-play-circle me-1"></i> Start Learning
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="premium-courses py-5">
+        <div class="container">
+            <h2 class="section-title">Premium Courses</h2>
+            <p class="text-center text-muted mb-5">Access exclusive content with our premium membership</p>
+
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                {% for c in all_courses %}
+                <div class="col">
+                    <div class="premium-course-card h-100">
+                        <div class="position-relative">
+                            <span class="badge-premium">
+                                <i class="bi bi-crown-fill me-1"></i> Premium
+                            </span>
+                            <img src="{{ c.image.url }}" class="card-img-top" alt="course_image"
+                                style="height: 200px; object-fit: cover;">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="h5 mb-2">{{ c.name }}</h3>
+                            <p class="text-muted small mb-3">{{ c.description|truncatewords:15 }}</p>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <p class="mb-0"><i class="bi bi-person-fill text-primary me-1"></i> {{ c.created_by}}</p>
+                                </div>
+                                <div>
+                                    <p class="mb-0"><i class="bi bi-clock-fill text-primary me-1"></i> {{ c.duration }}
+                                        hrs</p>
+                                </div>
+                            </div>
+                            <p class="mb-3"><strong class="text-success">Price: ₹{{ c.price }}</strong></p>
+                            {% if c.created_by != request.user.username %} {% if enroll %}
+                            {% if c.name in enroll %}
+                            <button class="btn signup" disabled>Enrolled</button>
+                            {% else %}
+                            <a href="{% url 'pay' c.id %}" class="btn login">Enroll Now</a>
+                            {% endif %}
+                            {% else %}
+                            <a href="{% url 'pay' c.id %}" class="btn login">Enroll Now</a>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endblock content %}

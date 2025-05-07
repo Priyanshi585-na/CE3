@@ -1,0 +1,9 @@
+.next>button{
+    background-color: rgb(146, 75, 223);
+    color: white;
+    border-radius: 5px;
+    height: 40px;
+    width: 120px;
+    margin-left: 15px;
+    border: 1px solid rgb(146, 75, 223);
+}

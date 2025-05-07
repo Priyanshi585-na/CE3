@@ -1,0 +1,77 @@
+{% extends 'base2.html' %}
+
+{% block title %}Edit Course{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Edit Your Course</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <label class="upload-box" for="courseImage">
+                    <div>
+                        <span>Course Image</span>
+                        <span class="d-block">
+                            {% if course.image %}
+                            <img src="{{ course.image.url }}" alt="{{ course.name }}" class="img-fluid mb-2">
+                            <span class="d-block">Click or drag to change image</span>
+                            {% else %}
+                            Choose a file or drag and drop it here
+                            {% endif %}
+                        </span>
+                        <span class="file-recommendations d-block mt-2">
+                            High-quality .jpg less than 20MB recommended
+                        </span>
+                    </div>
+                    <input type="file" id="courseImage" accept="image/*" name="image">
+                </label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="courseName" class="form-label">Course Name</label>
+            <input type="text" class="form-control" id="courseName" name="name" value="{{ course.name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="courseDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="courseDescription" name="description" rows="5" required>{{ course.description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" name="category" required>
+                <option value="" {% if not course.category %}selected{% endif %}>Choose...</option>
+                {% for cat in categories %}
+                <option value="{{ cat }}" {% if course.category == cat %}selected{% endif %}>
+                    {{ cat }}
+                </option>
+                {% endfor %}+
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="difficulty" class="form-label">Difficulty</label>
+            <select class="form-select" id="difficulty" name="difficulty" required>
+                <option value="Beginner" {% if course.difficulty == 'Beginner' %}selected{% endif %}>Beginner</option>
+                <option value="Intermediate" {% if course.difficulty == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+                <option value="Advanced" {% if course.difficulty == 'Advanced' %}selected{% endif %}>Advanced</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price (₹)</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ course.price }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration (Hours)</label>
+            <input type="number" step="0.1" class="form-control" id="duration" name="duration" value="{{ course.duration }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="video" class="form-label">Course Video</label>
+            <input type="file" class="form-control" id="video" name="video">
+            {% if course.video %}
+            <small class="form-text text-muted">Current video: {{ course.video.name }} (upload new to replace)</small>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary" name="publish">Publish</button>
+        <a href="{% url 'my_courses' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

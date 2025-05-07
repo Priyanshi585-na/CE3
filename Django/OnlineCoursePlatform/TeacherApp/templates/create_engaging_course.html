@@ -1,0 +1,148 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+Help
+{% endblock title %}
+{% block style_block %}
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: white;
+        color: #4a4a4a;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 960px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .image-container img {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .description {
+        margin-bottom: 30px;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .step {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .step-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .step-description {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .help {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 200px;
+        left: 30px;
+
+    }
+
+    .help_icon {
+        font-size: 52px;
+        color: rgb(150, 52, 215);
+    }
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+
+    <div class="mb-4 help">
+        <a href="{% url 'register_course' %}">
+                <i class="fas fa-plus-circle help_icon"></i>
+            </a>
+    </div>
+
+
+    <div class="image-container">
+        <img alt="Illustration of a person creating an online course on a computer"
+            src="https://storage.googleapis.com/a1aa/image/h_Ocgzg3njy9KjZ1hRnPPd1hlAyiIhFe_zLcrqBN4eM.jpg">
+    </div>
+    <h1 class="title">Create an Engaging Course</h1>
+    <p class="description">
+        It's important to make sure your course is engaging for your students with a well-structured, practical, and
+        rewarding learning experience. The most successful instructors spend time planning their course content
+        before they start recording to ensure their course helps students achieve clear goals.
+    </p>
+    <div class="step">
+        <h2 class="step-title">Step 1: Choose your course topic.</h2>
+        <p class="step-description">
+            Pick something you're knowledgeable in and genuinely excited about teaching. Learn more about
+            Marketplace Insights tool that helps you understand the demand and competition for your chosen topic.
+        </p>
+    </div>
+    <div class="step">
+        <h2 class="step-title">Step 2: Define your intended learners and your course’s learning objectives.</h2>
+        <p class="step-description">
+            Before you begin creating content for your course, it’s important to determine who you are teaching and
+            what your students will learn or be able to accomplish by the end of your course. Learn more about what
+            questions to ask yourself about your learners and how to write clear learning objectives.
+        </p>
+    </div>
+    <div class="step">
+        <h2 class="step-title">Step 3: Decide how students will practice what you’re teaching.</h2>
+        <p class="step-description">
+            students love being hands-on with their learning: they want to practice what they’ve learned through
+            exercises, activities, case studies, and more! There are lots of different types of practice activities
+            you can add to your course to help create an engaging online learning experience.
+        </p>
+    </div>
+    <div class="step">
+        <h2 class="step-title">Step 4: Create your course outline.</h2>
+        <p class="step-description">
+            Your course outline is the foundation for your course--this is where you decide how you will structure
+            and organize your course content. We have an outline template to help you get started!
+        </p>
+    </div>
+    <div class="step">
+        <h2 class="step-title">Step 5: Script your course.</h2>
+        <p class="step-description">
+            Once you know how your course will be structured, the next step is to prep for recording your lectures.
+            Most instructors find that scripting each lecture (or writing bullet point notes) helps to reduce the
+            amount of time spent recording and editing and increases the overall quality of their delivery.
+        </p>
+        <p class="step-description">
+            <span class="font-bold">Insider tip:</span> Learn the recommended course creation process directly from
+            the
+
+
+            Instructor Team and experienced instructors by taking the Official Course, How to Create an Online
+            Course.
+        </p>
+    </div>
+</div>
+
+
+{% endblock content %}

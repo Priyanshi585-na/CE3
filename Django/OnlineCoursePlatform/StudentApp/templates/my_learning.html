@@ -1,0 +1,38 @@
+{% extends "base2.html" %}
+
+{% block title %}My Learning{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">My Learning</h1>
+    
+    {% if enrollments %}
+        <div class="row">
+            {% for enrollment in enrollments %}
+                <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 22rem;">
+                        <img src="{{enrollment.image.url}}" alt="abc" class="card-img-top">
+                            
+                        
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ enrollment.name }}</h5>
+                            <p class="card-text">{{ enrollment.description|truncatechars:100 }}</p>
+                            <p class="card-text">{{ enrollment.created_by }}</p>
+                            
+                            
+                            <div class="mt-3">
+                                <a href="https://www.youtube.com" class="btn login">Continue Learning</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <p>You haven't enrolled in any courses yet.</p>
+            <a href="{% url 'home' %}" class="btn btn-primary">Browse Courses</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
