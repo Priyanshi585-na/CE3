@@ -326,7 +326,7 @@ def edit_course_admin(request, course_id):
     else:
         return render(request, 'edit_course.html', context)
     
-    
+@login_required    
 def delete_course_admin(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     api_url = f"{COURSES_API_URL}/{course_id}"
@@ -346,88 +346,5 @@ def delete_course_admin(request, course_id):
         
     except requests.exceptions.RequestException as e:
         messages.error(request, f"API Error: {e}")
-def delete_course_admin(request, course_id):
-    course = get_object_or_404(Course, id=course_id)
-    api_url = f"{COURSES_API_URL}/{course_id}"
-    headers = {}
-
-    try:
-        response = requests.delete(api_url, headers=headers)
-        response.raise_for_status() 
-
-        if response.status_code == 200 or response.status_code == 204:
-            course.delete() 
-            messages.success(request, f"Course deleted successfully!")
-        else:
-            error_data = response.json()
-            error_message = f"API Error: {error_data.get('detail', 'Failed to delete course.')}"
-            messages.error(request, error_message)
         
-    except requests.exceptions.RequestException as e:
-        messages.error(request, f"API Error: {e}")
-
-    return redirect('admin')
-
-def delete_available_course(request, course_id):
-    course = get_object_or_404(Course, id=course_id)
-    api_url = f"{AVAILABLE_COURSES_API_URL}/{course_id}"
-    headers = {}
-
-    try:
-        response = requests.delete(api_url, headers=headers)
-        response.raise_for_status() 
-
-        if response.status_code == 200 or response.status_code == 204:
-            course.delete() 
-            messages.success(request, f"Course deleted successfully!")
-        else:
-            error_data = response.json()
-            error_message = f"API Error: {error_data.get('detail', 'Failed to delete course.')}"
-            messages.error(request, error_message)
         
-    except requests.exceptions.RequestException as e:
-        messages.error(request, f"API Error: {e}")
-
-    return redirect('admin')
-
-
-def edit_available_course(request,course_id):
-      context={}
-      if request.method == 'POST':
-        name = request.POST.get('name')
-        api_url = f"{AVAILABLE_COURSES_API_URL}/{course_id}"
-        data = {
-            'name': name,
-        }
-        try:
-            response = requests.put(api_url, json=data)
-            response.raise_for_status()
-            messages.success(request, f"Course '{name}' updated successfully!")
-            return redirect('admin')
-        except requests.exceptions.RequestException as e:
-            try:
-                error_data = response.json()
-                error_message = f"API Error: {error_data.get('detail', str(e))}"
-            except:
-                error_message = f"API Error: {e}"
-            messages.error(request, error_message)
-            return render(request, 'edit_course.html', context)
-
-      else:
-        return render(request, 'edit_course.html', context)
-    
-    
-def add_available_course(request):
-     if request.method == 'POST':
-        name = request.POST.get('name')
-        data = {
-            'name': name,
-        }
-        response = requests.post(AVAILABLE_COURSES_API_URL, json=data) 
-        return redirect('admin')
-    
-    
-    
-    
-
-      
