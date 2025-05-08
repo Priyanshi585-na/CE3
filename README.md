@@ -5,58 +5,95 @@ Agaahi is a web-based online course platform designed to provide a rich and inte
 
 ## Features
 Agaahi offers a variety of features to enhance the learning experience:
-Course Management:Create, update, and delete courses.
-Organize courses into categories.
-Manage course content, including lessons, videos, and resources.
-User Management:User registration and authentication.
-Admin panel for user management.
+- Course Management:Create, update, and delete courses.
+- Organize courses into categories.
+- Manage course content.
+- User Management:User registration and authentication.
+- Admin panel for user management.
 
 ## Architecture
 Agaahi's architecture is designed to be modular and scalable. Here's a breakdown of the key components:
-Django Backend:Handles the core application logic.Manages the database (models).Provides an admin interface for managing content.Handles user authentication and authorization.
-Flask API:Acts as an intermediary between the Django backend and the frontend.Provides API endpoints for data retrieval and manipulation.Ensures a clean separation of concerns between the backend and frontend.
-Frontend (HTML, CSS):Provides the user interface for the platform.Interacts with the Flask API to display data and handle user interactions.Ensures a responsive and user-friendly experience.Uses modern HTML and CSS for structure and styling.
+
+- Django Backend: Handles the core application logic.Manages the database (models).Provides an admin interface for managing content.Handles user authentication and authorization.
+- Flask API: Acts as an intermediary between the Django backend and the frontend.Provides API endpoints for data retrieval and manipulation.
+- Frontend (HTML, CSS): Provides the user interface for the platform.
 
 
 ## **Installation and Setup**
 
 To set up Agaahi on your local machine, follow these steps:
 
-Prerequisites:
+### Prerequisites:
 
-Python 3.xpip (Python package installer)
+- Python 3.xpip (Python package installer)
 
-Virtualenv (recommended)
+- Virtualenv (recommended)
 
-Clone the repository
+### Clone the repository
+```bash
+git clone https://github.com/Priyanshi585-na/OnlineCoursePlatform.git
+cd OnlineCoursePlatform
+```
 
-source env/bin/activate  # On Linux/macOS
 
-env\Scripts\activate  # On Windows
 
-Install project dependencies: pip install -r requirements.txt 
+### Activate environmnent
 
+(If you are working on Linux/macOS)
+```bash 
+source env/bin/activate    
+```
+
+
+(If on Windows)
+```bash
+env\Scripts\activate 
+```
+
+Install project dependencies:
+
+```bash
+pip install -r requirements.txt 
+```
 
 ### **Setup (Flask)**
-Navigate to your Flask API directory: cd Flask-flask
+Navigate to your Flask API directory:
+```bash
+cd Flask-flask
+```
 
-Run the Flask development server: python app.py
+
+Run the Flask development server: 
+```bash
+python app.py
+```
 
 The Flask API will be accessible at http://localhost:5000/
 
 
 ### **Setup (Django)**
-pip install Django
 
+```bash
 cd Django/OnlineCoursePlatform
+```
 
-Make migrations: python manage.py makemigrations
+Make migrations and run them: 
+
+```bash
+python manage.py makemigrations
 
 Run migrations: python manage.py migrate
+```
 
-Create a superuser: python manage.py createsuperuser
 
-Start the Django development server: python manage.py runserver
+Create a superuser and run the development server:
+
+```bash
+python manage.py createsuperuser
+
+ python manage.py runserver
+```
+
 
 The Django backend will be accessible at http://localhost:8000/
 
