@@ -99,14 +99,11 @@ The Django backend will be accessible at http://localhost:8000/
 
 ## Contributions to Agaahi are welcome! 
 
- Please follow these steps:
- 
- Fork the repository.
- 
- Create a new branch for your feature or bug fix.
- 
- Commit your changes.
- 
- Push to the branch.
- 
- Submit a pull request.# G33OnlineCoursePlatform
+Please follow these steps:
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Commit your changes.
+- Push to the branch.
+- Submit a pull request.
+
+#G33OnlineCoursePlatform
