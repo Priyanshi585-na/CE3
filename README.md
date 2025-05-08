@@ -64,6 +64,9 @@ python app.py
 The Flask API will be accessible at http://localhost:5000/
 
 
+****MAKE SURE THE FLASK SERVER IS RUNNING TO MAKE THE DJANGO SERVER WORK****
+
+
 ### **Setup (Django)**
 
 ```bash
@@ -89,6 +92,8 @@ python manage.py createsuperuser
 
 
 The Django backend will be accessible at http://localhost:8000/
+
+
 
 
 
