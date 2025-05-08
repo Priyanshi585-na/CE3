@@ -52,7 +52,7 @@ pip install -r requirements.txt
 ### **Setup (Flask)**
 #### Navigate to your Flask API directory:
 ```bash
-cd Flask-flask
+cd Flask
 ```
 
 
