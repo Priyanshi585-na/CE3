@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+<title>Feedback Review</title>
+{% block style_block %}
+
+
+<style>
+    .container {
+        max-width: 500px;
+        margin: auto;
+        margin-top: 30px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: green;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        font-size: 16px;
+        text-decoration: none;
+        color: white;
+        background-color: rgb(157, 26, 228);
+        border-radius: 5px;
+    }
+
+    .button:hover {
+        background-color: rgb(180, 75, 240);
+    }
+
+    a:hover{
+        color: white !important;
+    }
+
+
+    main {
+      height: 80vh;
+    }
+
+</style>
+{% endblock style_block %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+<main>
+    <div class="container">
+        <h2 class="text-center">Review Added Successfully!</h2>
+        <p class="text-center">Thank you for your feedback. We appreciate your thoughts.</p>
+        <a href="{% url 'feedback' %}" class="button">Add New Feedback</a>
+    </div>
+</main>
+{% endblock content %}

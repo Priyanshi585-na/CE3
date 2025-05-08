@@ -1,0 +1,137 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+Help
+{% endblock title %}
+{% block style_block %}
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: white;
+        color: #4a4a4a;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .image-container img {
+        max-width: 200px;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .description {
+        margin-bottom: 30px;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .step {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .step-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .step-description {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .help {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 200px;
+        left: 30px;
+
+    }
+
+    .help_icon {
+        font-size: 52px;
+        color: rgb(150, 52, 215);
+    }
+</style>
+{% endblock style_block %}
+
+
+{% block content %}
+
+
+<div class="container">
+
+    <div class="mb-4 help">
+        <a href="{% url 'register_course' %}">
+                <i class="fas fa-plus-circle help_icon"></i>
+
+            </a>
+        
+    </div>
+
+
+    <div class="image-container">
+        <img alt="Illustration of a person recording a video on a laptop"
+            src="https://storage.googleapis.com/a1aa/image/MRzYAcGpFnMJBt9Ihgvy9Sw5E2r6NGF8DVONFZ99nGs.jpg">
+    </div>
+    <h1 class="title">Recording Your Course Content</h1>
+    <p class="description">
+        Once you have chosen your topic, created your course outline, and planned your content, it's important to start
+        planning your video production. Don’t worry if you’ve never recorded an online course. We have resources for you
+        along the way!
+    </p>
+    <div class="step">
+        <h2 class="step-title">Step 1: Determine the type of videos you’ll record:</h2>
+        <p class="step-description">
+            Once your course content is planned (you have validated your
+            course topic and completed your
+            course outline), it’s time to record. You can record yourself (talking head), record your screen
+            (screencasting), or do a mix of both. The type of course you'll record will determine the equipment you'll
+            need.
+        </p>
+    </div>
+    <div class="step">
+        <h2 class="step-title">Step 2: Gather the audio and video equipment you need.</h2>
+        <p class="step-description">
+            You may even already have some equipment at home! Take a look at our
+            recording equipment recommendations for suggestions for microphones, cameras, and screencasting, and editing
+            software for various budgets.
+        </p>
+    </div>
+    <div class="step">
+        <h2 class="step-title">Step 3: Set up your recording space.</h2>
+        <p class="step-description">
+            Once you have your recording equipment, it’s time to find a quiet place to set it all up and get ready to
+            record.
+            Get tips for setting up your recording space to deliver high-quality audio and video, plus get a
+            behind-the-scenes look at other instructors’ recording setup, and learn hacks for better A/V quality.
+        </p>
+    </div>
+    <div class="step">
+        <h2 class="step-title">Step 4: Send us a Test Video.</h2>
+        <p class="step-description">
+            Once your recording space is set up, it’s time to test it out! We have a team ready to give you feedback to
+            ensure you meet our recording quality standards. Learn more about submitting a Test Video.
+        </p>
+    </div>
+</div>
+<a href="{%url 'create_engaging_course'%}">Want to create Engaging Courses?</a>
+<br><br>
+{% endblock content %}

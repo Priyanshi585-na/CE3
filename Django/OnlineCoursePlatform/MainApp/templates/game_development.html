@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block style_block %}
+
+{% endblock style_block %}
+
+
+{% block content %}
+
+<div class="container py-5">
+    <header class="text-center mb-5">
+        <h1>Game Development Courses</h1>
+        <p class="lead">Start your journey to becoming a Game Development expert. Learn from industry leaders and
+            professionals.</p>
+    </header>
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="row row-cols-1 row-cols-md-4 row-cols-lg-4 g-4">
+                {% for course in game_development_courses %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        {% if course.image and course.image.url %}
+                        <img src="{{ course.image.url }}" class="card-img-top" alt="{{ course.name }}"
+                            style="height: 200px; object-fit: cover;">
+                        {% else %}
+                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <span class="text-muted">No Image Available</span>
+                        </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.name }}</h5>
+                            <p class="card-text text-muted">{{ course.description|truncatechars:100 }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-warning">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </small>
+                                </div>
+                                <p class="mb-0 fw-bold">₹{{ course.price }}</p>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-white border-top-0">
+                            <div class="d-grid">
+                                <a href="{% url 'login' %}" class="btn login">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col">
+                    <div class="alert alert-info" role="alert">
+                        No Game Development courses are currently available. Please check back later.
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <p class="lead">Sign up to unlock full access to premium Game Development courses!</p>
+    <a href="{url 'register'}" class="btn btn-lg btn-theme">Sign Up Now</a>
+</div>
+</div>
+
+
+{% endblock %}

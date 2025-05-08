@@ -1,0 +1,243 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block style_block %}
+<style>
+    .dashboard-box {
+        background: #f8f6ff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 10px 20px 30px rgba(70, 2, 70, 0.782);
+        margin-top: 20px;
+    }
+
+    .nav-tabs .nav-link.active {
+        background-color: #b197fc;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .nav-tabs .nav-link {
+        color: #b197fc;
+    }
+
+    h1,
+    h2 {
+        color: #6f42c1;
+    }
+
+    .table th {
+        background-color: #e8dcfb;
+        color: #4b0082;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f3eaff;
+    }
+
+    .tab-pane {
+        min-height: auto;
+        overflow-y: auto;
+    }
+
+
+    .action-icons i {
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .action-icons .fa-pencil-alt {
+        color: #28a745;
+    }
+
+    .action-icons .fa-trash-alt {
+        color: #dc3545;
+    }
+
+    .action-icons i:hover {
+        opacity: 0.8;
+    }
+
+    .action-icons .fa-pencil-alt:hover {
+        color: #218838;
+    }
+
+    .action-icons .fa-trash-alt:hover {
+        color: #c82333;
+    }
+
+    .add-button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+    }
+
+    .add-button-container a {
+        padding: 10px 20px;
+        background-color: #6f42c1;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .add-button-container a:hover {
+        background-color: #5a2d9c;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Admin Dashboard</h1>
+
+    <ul class="nav nav-tabs mb-3" id="adminTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="users-tab" data-bs-toggle="tab"
+                data-bs-target="#users-tab-pane">Users</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="courses-tab" data-bs-toggle="tab"
+                data-bs-target="#courses-tab-pane">Courses</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="feedback-tab" data-bs-toggle="tab"
+                data-bs-target="#feedback-tab-pane">Feedback</button>
+        </li>
+
+    </ul>
+
+    <div class="tab-content" id="adminTabContent">
+
+        <div class="tab-pane fade show active dashboard-box" id="users-tab-pane">
+            <h3>Registered Users</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Field</th>
+                        <th>Mobile</th>
+                        <th>Gender</th>
+                        <th>Role</th>
+                        <th>LinkedIn</th>
+                        <th>Experience</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.preferred_field }}</td>
+                        <td>{{ user.mobile }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>{{ user.linkedin }}</td>
+                        <td>{{ user.experience }}</td>
+                        <td class="action-icons">
+                            <a href="{% url 'delete_user' user_id=user.id %}"
+                                onclick="return confirm('Are you sure you want to delete this user?');"><i
+                                    class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane fade dashboard-box" id="courses-tab-pane">
+            <div class="add-button-container">
+                <a href="{% url 'register_course' %}">Add Course</a>
+            </div>
+            <h3>Courses Offered</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Created By</th>
+                        <th>Price</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in all_courses %}
+                    <tr>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.description }}</td>
+                        <td>{{ course.created_by }}</td>
+                        <td>{{ course.price }}</td>
+                        <td>{{ course.duration }}</td>
+                        <td class="action-icons">
+                            <a href="{% url 'edit_course_admin' course.id %}"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{% url 'delete_course_admin' course.id %}"
+                                onclick="return confirm('Are you sure you want to delete this course?');"><i
+                                    class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane fade dashboard-box" id="feedback-tab-pane">
+            <h3>User Feedback</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for feed in feedback %}
+                    <tr>
+                        <td>{{ feed.name }}</td>
+                        <td>{{ feed.email }}</td>
+                        <td>{{ feed.message }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane fade dashboard-box" id="course-tab-pane">
+            <div class="add-button-container">
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</a>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <label for="name">Name:</label>
+                                    <input class="form-control" type="text" aria-label="default input example"
+                                        name="name" value="{{course}}" id="name">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn signup" data-bs-dismiss="modal">Close</button>
+                                <a class="btn login" href="{% url 'add_available_course'%}">Save changes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

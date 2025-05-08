@@ -1,0 +1,213 @@
+{% extends 'base2.html' %}
+{% block title %}
+Python Courses
+{% endblock title %}
+
+{% block style %}
+<style>
+  .card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .course-info {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .card:hover .course-info {
+    display: block;
+    opacity: 1;
+  }
+</style>
+{% endblock style %}
+
+{% block content %}
+
+
+<main class="container py-5">
+  <section class="mb-5">
+    <h1 class="text-center mb-4 fw-bold display-5">
+      Python Courses
+    </h1>
+    <p class="text-center lead mb-5">
+      Our most popular and highly-rated Python courses to jumpstart your learning.
+    </p>
+  </section>
+
+
+  <section class="mb-5">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <div class="col">
+        <div class="card shadow-sm h-100" style="width: 20rem; position: relative; overflow: hidden;">
+          <a href="https://youtu.be/V-k0b6nAhcc?si=Ihh8WCI4zWMIo_IT" target="_blank"
+            class="text-decoration-none text-dark">
+            <img alt="Python Bootcamp" class="card-img-top" height="200"
+              src="https://storage.googleapis.com/a1aa/image/FDmHqR95zRk8tNnPtIQahu01rjhm7i0Cr_H-pK8psJ4.jpg"
+              style="object-fit: cover;">
+          </a>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold">
+              The Complete Python Bootcamp From Zero to Hero in Python
+            </h5>
+            <p class="card-text text-muted small mb-2">
+              Jose Portilla, Pierian Training
+            </p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="text-warning me-1">
+                4.6
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span class="ms-1">4.7</span>
+              </span>
+              <span class="text-muted small">(528,865)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm h-100" style="width: 20rem; position: relative; overflow: hidden;">
+          <a href="https://youtu.be/3s6xuH17QPc?si=w0mR3KfalDqM5xIq" target="_blank"
+            class="text-decoration-none text-dark">
+            <img alt="Automate Boring Stuff with Python" class="card-img-top" height="200"
+              src="https://storage.googleapis.com/a1aa/image/3ZGWiStP3SjFdG_4wun-Vz27bV2dZ5ZYhUSBJMY03UU.jpg"
+              style="object-fit: cover;">
+          </a>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold">
+              Automate the Boring Stuff with Python Programming
+            </h5>
+            <p class="card-text text-muted small mb-2">
+              Al Sweigart
+            </p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="text-warning me-1">
+                4.6
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </span>
+              <span class="text-muted small">(115,442)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm h-100" style="width: 20rem; position: relative; overflow: hidden;">
+          <a href="https://youtu.be/LHBE6Q9XlzI?si=KP8qNFJsUj7bgnYT" target="_blank"
+            class="text-decoration-none text-dark">
+            <img alt="Python for Data Science and ML" class="card-img-top" height="200"
+              src="https://storage.googleapis.com/a1aa/image/2pof3FpCjfcBrlayS00UajjCavgaoET0pOs3Z2mudrA.jpg"
+              style="object-fit: cover;">
+          </a>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold">
+              Python for Data Science and Machine Learning Bootcamp
+            </h5>
+            <p class="card-text text-muted small mb-2">
+              Jose Portilla, Pierian Training
+            </p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="text-warning me-1">
+                4.6
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </span>
+              <span class="text-muted small">(148,940)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col">
+        <div class="card shadow-sm h-100" style="width: 20rem; position: relative; overflow: hidden;">
+          <a href="https://youtu.be/LHBE6Q9XlzI?si=KP8qNFJsUj7bgnYT" target="_blank"
+            class="text-decoration-none text-dark">
+            <img alt="Python for Data Science and ML" class="card-img-top" height="200"
+              src="https://th.bing.com/th/id/OIP.az-LmxMYOMJO5mtzJ-KUhAHaEc?rs=1&pid=ImgDetMain"
+              style="object-fit: cover;">
+          </a>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title fw-bold">
+              Python for Everyone
+            </h5>
+            <p class="card-text text-muted small mb-2">
+              Lakshmi Bhatnagar
+            </p>
+            <div class="d-flex align-items-center mb-2">
+              <span class="text-warning me-1">
+                4.6
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </span>
+              <span class="text-muted small">(136,840)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% if python_courses %}
+  <h2 class="mt-5 mb-3 fw-bold">More Python Courses</h2>
+  <div class="row row-cols-1 row-cols-md-4 g-4" style="padding: 50px;">
+    {% for course in python_courses %}
+    <div class="col">
+      <div class="card shadow-sm h-100">
+        <img src="{{ course.image.url }}" class="card-img-top" alt="{{ course.name }}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">{{ course.name }}</h5>
+          <p class="card-text text-muted small">{{ course.description|truncatewords:20 }}</p>
+          <p class="card-text"><strong class="text-">Price:</strong> <span class="fw-bold text-success">₹{{course.price}}</span></p>
+          <p class="card-text"><strong class="text">Duration:</strong> {{ course.duration }} hours</p>
+          <p class="card-text"><strong class="text">Instructor:</strong> {{ course.created_by }}</p>
+          <div class="mt-auto">
+            {% if course.created_by != request.user.username %} {% if enroll %}
+            {% if course.name in enroll %}
+            <button class="btn signup" disabled>Enrolled</button>
+            {% else %}
+            <a href="{% url 'pay' course.id %}" class="btn login">Enroll Now</a>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'pay' course.id %}" class="btn login">Enroll Now</a>
+            {% endif %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <br><br>
+
+</main>
+
+
+{% endblock content %}
