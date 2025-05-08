@@ -44,8 +44,11 @@ def pay_view(request,course_id):
     context['course_id']=course_id
     return render(request,'pay.html', context)
 
-
 @login_required
+def cancel_view(request):
+    context = get_user_role_context(request)
+    return render(request,'cancel.html', context)
+
 def web_development_view(request):
     context = get_user_role_context(request)
     web_courses = [course for course in course_one if course.get('category')=="Web Development"]
@@ -66,8 +69,6 @@ def web_development_view(request):
     context['web_dev_courses'] = published_courses
     return render(request, 'webdevelopmentcourse.html',context)
 
-
-@login_required
 def ai(request):
     context = get_user_role_context(request)
     ai_courses = [course for course in course_one if course.get('category')=="AI Engineering"]
@@ -89,7 +90,7 @@ def ai(request):
     context['enroll']=enroll
     context['ai_courses'] = published_courses
     return render(request,'aicourse.html', context)
-@login_required
+
 def data_science(request):
     context = get_user_role_context(request)
     data_science_courses = [course for course in course_one if course.get('category')=="Data Science"]
@@ -111,7 +112,7 @@ def data_science(request):
     context['enroll']=enroll
     context['data_science_courses'] = published_courses
     return render(request, 'datasciencecourse.html', context)
-@login_required
+
 def cpp(request):
     context = get_user_role_context(request)
     cpp_courses = [course for course in course_one if course.get('category')=="C++"]
@@ -134,7 +135,7 @@ def cpp(request):
     context['cpp_courses'] = published_courses
     return render(request, 'cppcourse.html', context)
 
-@login_required
+
 def excel(request):
     context = get_user_role_context(request)
     sql_courses = [course for course in course_one if course.get('category')=="SQL"]
@@ -157,7 +158,7 @@ def excel(request):
     context['sql_courses'] = published_courses
     return render(request, 'sqlcourse.html', context) 
 
-@login_required
+
 def python(request):
     context = get_user_role_context(request)
     python_courses = [course for course in course_one if course.get('category')=="Python"]
@@ -179,7 +180,7 @@ def python(request):
     context['enroll']=enroll
     context['python_courses'] = published_courses
     return render(request,'pythoncourse.html', context)
-@login_required
+
 def java(request):
     context = get_user_role_context(request)
     java_courses = [course for course in course_one if course.get('category')=="Java"]
@@ -202,7 +203,6 @@ def java(request):
     context['java_courses'] = published_courses
     return render(request, 'javacourse.html', context)
 
-@login_required
 def game(request):
     context = get_user_role_context(request)
     game_development_courses =[course for course in course_one if course.get('category')=="Game Development"]
@@ -225,14 +225,12 @@ def game(request):
     context['game_development_courses'] = published_courses
     return render(request, 'gamedevcourse.html', context)
 
-@login_required
 def my_learning_view(request):
     context = get_user_role_context(request)
     enrollments = Enrolled_Course.objects.filter(user=request.user)
     context['enrollments']=enrollments
     return render(request,'my_learning.html',context) 
 
-@login_required
 def enroll(request,course_id):
      url = f"{COURSES_API_URL}/{course_id}"
      course_response = requests.get(url).json()

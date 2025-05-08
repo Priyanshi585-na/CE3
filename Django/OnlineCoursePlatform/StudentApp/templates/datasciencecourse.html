@@ -141,7 +141,8 @@ Data Science Courses
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title fw-bold">{{ course.name }}</h5>
                     <p class="card-text text-muted small">{{ course.description|truncatewords:20 }}</p>
-                    <p class="card-text"><strong class="text-">Price:</strong> <span class="fw-bold text-success">₹{{course.price }}</span></p>
+                    <p class="card-text"><strong class="text-">Price:</strong> <span class="fw-bold text-success">₹{{
+                            course.price }}</span></p>
                     <p class="card-text"><strong class="text">Duration:</strong> {{ course.duration }} hours</p>
                     <p class="card-text"><strong class="text">Instructor:</strong> {{ course.created_by }}</p>
                     <div class="mt-auto">
