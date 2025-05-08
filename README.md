@@ -38,9 +38,9 @@ Install project dependencies: pip install -r requirements.txt
 
 
 ### **Setup (Flask)**
-Navigate to your Flask API directory:cd 'Flask_folder'
+Navigate to your Flask API directory: cd Flask-flask
 
-Run the Flask development server:python app.py
+Run the Flask development server: python app.py
 
 The Flask API will be accessible at http://localhost:5000/
 
@@ -49,8 +49,6 @@ The Flask API will be accessible at http://localhost:5000/
 pip install Django
 
 cd Django/OnlineCoursePlatform
-
-If you don't have a repo, and have the files locally, navigate to the directory
 
 Make migrations: python manage.py makemigrations
 
@@ -64,7 +62,7 @@ The Django backend will be accessible at http://localhost:8000/
 
 
 
-Contributions to Agaahi are welcome! 
+### Contributions to Agaahi are welcome! 
 
  Please follow these steps:
  
