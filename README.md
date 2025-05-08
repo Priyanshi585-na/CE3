@@ -35,35 +35,28 @@ git clone https://github.com/Priyanshi585-na/OnlineCoursePlatform.git
 cd OnlineCoursePlatform
 ```
 
-
-
-### Activate environmnent
-
-(If you are working on Linux/macOS)
-```bash 
-source env/bin/activate    
-```
-
-
-(If on Windows)
+### Create and activate environment
 ```bash
-env\Scripts\activate 
+python -m venv env
+
+source env/bin/activate     #for linux/macOS
+env\Scripts\activate        #for Windows 
 ```
 
-Install project dependencies:
+### Install project dependencies:
 
 ```bash
 pip install -r requirements.txt 
 ```
 
 ### **Setup (Flask)**
-Navigate to your Flask API directory:
+#### Navigate to your Flask API directory:
 ```bash
 cd Flask-flask
 ```
 
 
-Run the Flask development server: 
+#### Run the Flask development server: 
 ```bash
 python app.py
 ```
@@ -77,7 +70,7 @@ The Flask API will be accessible at http://localhost:5000/
 cd Django/OnlineCoursePlatform
 ```
 
-Make migrations and run them: 
+#### Make migrations and run them: 
 
 ```bash
 python manage.py makemigrations
@@ -86,7 +79,7 @@ python manage.py migrate
 ```
 
 
-Create a superuser and run the development server:
+#### Create a superuser and run the development server:
 
 ```bash
 python manage.py createsuperuser
