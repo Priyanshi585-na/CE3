@@ -21,40 +21,59 @@ Frontend (HTML, CSS):Provides the user interface for the platform.Interacts with
 ## **Installation and Setup**
 
 To set up Agaahi on your local machine, follow these steps:
+
 Prerequisites:
+
 Python 3.xpip (Python package installer)
+
 Virtualenv (recommended)
 
 Clone the repository
+
 source env/bin/activate  # On Linux/macOS
+
 env\Scripts\activate  # On Windows
+
 Install project dependencies: pip install -r requirements.txt 
 
 
 ### **Setup (Flask)**
 Navigate to your Flask API directory:cd 'Flask_folder'
+
 Run the Flask development server:python app.py
+
 The Flask API will be accessible at http://localhost:5000/
 
 
 ### **Setup (Django)**
-Install Django: 
 pip install Django
+
 cd Django/OnlineCoursePlatform
 
 If you don't have a repo, and have the files locally, navigate to the directory
+
 Make migrations: python manage.py makemigrations
+
 Run migrations: python manage.py migrate
+
 Create a superuser: python manage.py createsuperuser
+
 Start the Django development server: python manage.py runserver
+
 The Django backend will be accessible at http://localhost:8000/
 
 
 
 Contributions to Agaahi are welcome! 
+
  Please follow these steps:
+ 
  Fork the repository.
+ 
  Create a new branch for your feature or bug fix.
+ 
  Commit your changes.
+ 
  Push to the branch.
+ 
  Submit a pull request.# G33OnlineCoursePlatform
