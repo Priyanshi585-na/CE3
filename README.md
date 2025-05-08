@@ -97,7 +97,7 @@ The Django backend will be accessible at http://localhost:8000/
 
 
 
-### Contributions to Agaahi are welcome! 
+## Contributions to Agaahi are welcome! 
 
  Please follow these steps:
  
